@@ -1901,9 +1901,9 @@
             
             let playerLaserCount = lasers.filter(l => !(l instanceof EnemyLaser)).length;
 
-            if (ship.weapon === 'ray') {
+if (ship.weapon === 'ray') {
                 playSound('ray'); let endX = lx + 1500 * Math.cos(ship.a); let endY = ly - 1500 * Math.sin(ship.a);
-                particles.push({ life: 0.5, decay: 0.05, update: function() { this.life -= this.decay; }, draw: function(c) { c.globalAlpha = Math.max(0, this.life); c.strokeStyle = "rgba(0, 255, 255, 0.9)"; c.lineWidth = 20 * this.life; c.beginPath(); c.moveTo(lx, ly); c.lineTo(endX, endY); c.stroke(); c.globalAlpha = 1.0; }.bind(this) });
+                particles.push({ life: 0.5, decay: 0.05, update: function() { this.life -= this.decay; }, draw: function(c) { c.globalAlpha = Math.max(0, this.life); c.strokeStyle = "rgba(0, 255, 255, 0.9)"; c.lineWidth = 20 * this.life; c.beginPath(); c.moveTo(lx, ly); c.lineTo(endX, endY); c.stroke(); c.globalAlpha = 1.0; } });
                 for (let i = asteroids.length - 1; i >= 0; i--) { if (distToSegment(asteroids[i].x, asteroids[i].y, lx, ly, endX, endY) < asteroids[i].r) damageAsteroid(i, 5); }
                 for (let i = ufos.length - 1; i >= 0; i--) { let u = ufos[i]; if (distToSegment(u.x, u.y, lx, ly, endX, endY) < u.r) { createExplosion(u.x, u.y, 10, "red"); if(u.die) u.die(); else u.isDead = true; if(!ship.dead) ship.special = Math.min(100, ship.special + 2); } }
                 for (let i = bosses.length - 1; i >= 0; i--) { if (bosses[i].active && distToSegment(bosses[i].x, bosses[i].y, lx, ly, endX, endY) < bosses[i].r) { bosses[i].takeDamage(10); if(!ship.dead) ship.special = Math.min(100, ship.special + 0.5); } }
